@@ -7,7 +7,7 @@
             com.mysql.cj.jdbc.Driver
         </property>
         <property name="hibernate.connection.url">
-            jdbc:mysql://localhost:3308/hibernate_1daw?createDatabaseIfNotExist=true
+            jdbc:mysql://localhost:3306/hibernate1?createDatabaseIfNotExist=true
         </property>
         <property name="hibernate.connection.username">root</property>
         <property name="hibernate.connection.password">toor</property>
