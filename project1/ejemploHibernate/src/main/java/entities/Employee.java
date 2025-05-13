@@ -19,6 +19,7 @@ public class Employee {
     /**
      * CascadeType.ALL --> cuando persiste en BBDD el Employee inserta también Address
      * CascadeType.DETACH --> solo persiste el Employee, la Address tiene que ya estar ya en BBDD
+     * OneToOne -> un empleado una dirección
      */
     @OneToOne(cascade = CascadeType.ALL)
     private Address address;

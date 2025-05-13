@@ -50,8 +50,8 @@ public class App {
         //        .forEach(System.out::println);
 
 
-        //emp3.setAddress(new Address("Otra casa","Cuevas","España","30303"));
-        emp3.setAddress(ad1);
+        emp3.setAddress(new Address("Otra casa","Cuevas","España","30303"));
+        //emp3.setAddress(ad1);
         eRepo.update(emp3);
 
         //Cerrar sesión BBDD
