@@ -3,6 +3,7 @@ package entities;
 import jakarta.persistence.*;
 
 @Entity
+@Table(name = "employees")
 public class Employee {
 
     @Id
@@ -45,5 +46,15 @@ public class Employee {
 
     public void setAge(Integer age) {
         this.age = age;
+    }
+
+    @Override
+    public String toString() {
+        final StringBuffer sb = new StringBuffer("Employee{");
+        sb.append("id=").append(id);
+        sb.append(", name='").append(name).append('\'');
+        sb.append(", age=").append(age);
+        sb.append('}');
+        return sb.toString();
     }
 }
