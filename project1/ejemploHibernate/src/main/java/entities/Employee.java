@@ -16,12 +16,20 @@ public class Employee {
     @Column(name = "age") //Nombre en la tabla
     private Integer age;
 
+    /**
+     * CascadeType.ALL --> cuando persiste en BBDD el Employee inserta también Address
+     * CascadeType.DETACH --> solo persiste el Employee, la Address tiene que ya estar ya en BBDD
+     */
+    @OneToOne(cascade = CascadeType.ALL)
+    private Address address;
+
     public Employee() {
     }
 
-    public Employee(String name, Integer age) {
+    public Employee(String name, Integer age, Address address) {
         this.name = name;
         this.age = age;
+        this.address = address;
     }
 
     public Long getId() {
@@ -48,12 +56,21 @@ public class Employee {
         this.age = age;
     }
 
+    public Address getAddress() {
+        return address;
+    }
+
+    public void setAddress(Address address) {
+        this.address = address;
+    }
+
     @Override
     public String toString() {
         final StringBuffer sb = new StringBuffer("Employee{");
         sb.append("id=").append(id);
         sb.append(", name='").append(name).append('\'');
         sb.append(", age=").append(age);
+        sb.append(", address=").append(address);
         sb.append('}');
         return sb.toString();
     }
