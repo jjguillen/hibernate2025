@@ -22,7 +22,12 @@ public class Employee {
      * OneToOne -> un empleado una dirección
      */
     @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "address_id", foreignKey = @ForeignKey(name = "Emp_Add_FK"))
     private Address address;
+
+    @ManyToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "company_id", foreignKey = @ForeignKey(name = "Emp_Cmp_FK"))
+    private Company company;
 
     public Employee() {
     }
@@ -65,13 +70,20 @@ public class Employee {
         this.address = address;
     }
 
+    public Company getCompany() {
+        return company;
+    }
+
+    public void setCompany(Company company) {
+        this.company = company;
+    }
+
     @Override
     public String toString() {
         final StringBuffer sb = new StringBuffer("Employee{");
         sb.append("id=").append(id);
         sb.append(", name='").append(name).append('\'');
         sb.append(", age=").append(age);
-        sb.append(", address=").append(address);
         sb.append('}');
         return sb.toString();
     }

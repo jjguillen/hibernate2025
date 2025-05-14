@@ -54,6 +54,10 @@ public class App {
         //emp3.setAddress(ad1);
         eRepo.update(emp3);
 
+        System.out.println("------------");
+        Employee nuevo = eRepo.findById(3L);
+        System.out.println(nuevo.getAddress());
+
         //Cerrar sesión BBDD
         eRepo.close();
         aRepo.close();
