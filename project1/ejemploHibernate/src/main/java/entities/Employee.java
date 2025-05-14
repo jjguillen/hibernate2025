@@ -29,6 +29,9 @@ public class Employee {
     @JoinColumn(name = "company_id", foreignKey = @ForeignKey(name = "Emp_Cmp_FK"))
     private Company company;
 
+
+
+
     public Employee() {
     }
 

@@ -2,6 +2,9 @@ package entities;
 
 import jakarta.persistence.*;
 
+import java.util.HashSet;
+import java.util.Set;
+
 @Entity(name="projects")
 public class Project {
 
@@ -17,6 +20,12 @@ public class Project {
     private String description;
 
     private String status;
+
+    @ManyToMany
+    @JoinTable(name = "project_employee",
+        joinColumns = { @JoinColumn(name = "project_id") },
+            inverseJoinColumns = { @JoinColumn(name = "employee_id") } )
+    private Set<Employee> employees = new HashSet<>();
 
     public Project() {
     }
@@ -66,6 +75,14 @@ public class Project {
 
     public void setStatus(String status) {
         this.status = status;
+    }
+
+    public Set<Employee> getEmployees() {
+        return employees;
+    }
+
+    public void setEmployees(Set<Employee> employees) {
+        this.employees = employees;
     }
 
     @Override

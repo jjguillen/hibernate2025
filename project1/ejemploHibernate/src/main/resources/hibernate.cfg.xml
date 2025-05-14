@@ -21,5 +21,6 @@
         <mapping class="entities.Employee" />
         <mapping class="entities.Address" />
         <mapping class="entities.Company" />
+        <mapping class="entities.Project" />
     </session-factory>
 </hibernate-configuration>
