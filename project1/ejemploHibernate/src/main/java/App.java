@@ -2,6 +2,7 @@ import entities.Address;
 import entities.Company;
 import entities.Employee;
 import entities.Project;
+import org.hibernate.Hibernate;
 import org.hibernate.Session;
 import repositories.AddressRepository;
 import repositories.CompanyRepository;
@@ -87,14 +88,33 @@ public class App {
         System.out.println(comp1.getEmployees());
         //comp1.getEmployees().forEach(System.out::println);
 
-
+        System.out.println("--- Projects ----");
         //Añadir empleados a un proyecto
         pr1.getEmployees().add(emp1);
+        pr1.getEmployees().add(emp2);
         pr2.getEmployees().add(emp2);
         pr2.getEmployees().add(emp3);
         pRepo.update(pr1);
 
+        //Hay que añadir la relación por los dos sitios
+        emp2.getProjects().add(pr1);
+        emp2.getProjects().add(pr2);
+        emp1.getProjects().add(pr1);
+        emp3.getProjects().add(pr2);
+        eRepo.update(emp2);
+        eRepo.update(emp1);
+        eRepo.update(emp3);
+
         pRepo.findById(2L).getEmployees().forEach(System.out::println);
+
+        System.out.println("--- Proyectos de un empleado ----");
+        //Consultar los proyectos de un empleado
+        var emp = eRepo.findById(2L);
+        emp.getProjects().forEach(System.out::println);
+
+        System.out.println("Empleado 3");
+        emp3.getProjects().forEach(System.out::println);
+        System.out.println("FIN");
 
         //Cerrar sesión BBDD
         eRepo.close();

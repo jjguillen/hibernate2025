@@ -2,6 +2,9 @@ package entities;
 
 import jakarta.persistence.*;
 
+import java.util.HashSet;
+import java.util.Set;
+
 @Entity
 @Table(name = "employees")
 public class Employee {
@@ -29,7 +32,8 @@ public class Employee {
     @JoinColumn(name = "company_id", foreignKey = @ForeignKey(name = "Emp_Cmp_FK"))
     private Company company;
 
-
+    @ManyToMany(mappedBy = "employees")
+    private Set<Project> projects = new HashSet<>();
 
 
     public Employee() {
@@ -79,6 +83,14 @@ public class Employee {
 
     public void setCompany(Company company) {
         this.company = company;
+    }
+
+    public Set<Project> getProjects() {
+        return projects;
+    }
+
+    public void setProjects(Set<Project> projects) {
+        this.projects = projects;
     }
 
     @Override
