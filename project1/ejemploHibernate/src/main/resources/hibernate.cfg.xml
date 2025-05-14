@@ -20,5 +20,6 @@
         <property name="hibernate.connection.characterEncoding">utf8</property>
         <mapping class="entities.Employee" />
         <mapping class="entities.Address" />
+        <mapping class="entities.Company" />
     </session-factory>
 </hibernate-configuration>

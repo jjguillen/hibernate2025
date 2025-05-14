@@ -1,7 +1,9 @@
 import entities.Address;
+import entities.Company;
 import entities.Employee;
 import org.hibernate.Session;
 import repositories.AddressRepository;
+import repositories.CompanyRepository;
 import repositories.EmployeeRepository;
 import utils.HibernateUtil;
 
@@ -11,6 +13,11 @@ public class App {
         //Creamos repositorios
         EmployeeRepository eRepo = new EmployeeRepository();
         AddressRepository aRepo = new AddressRepository();
+        var cRepo = new CompanyRepository();
+
+        Company c1 = new Company("PrimaFlor S.L.", "Address 1");
+        //cRepo.insert(c1);
+
 
         Address ad1 = new Address("Avenida Federico", "Vera", "España",
                 "28000");
@@ -25,12 +32,15 @@ public class App {
         aRepo.findAll().forEach(System.out::println);
 
         Employee emp1 = new Employee("Pascual", 25, ad1);
+        emp1.setCompany(c1);
         eRepo.insert(emp1);
 
         Employee emp2 = new Employee("Nuria", 26, ad2);
+        emp2.setCompany(c1);
         eRepo.insert(emp2);
 
         Employee emp3 = new Employee("Marc", 21, ad3);
+        emp3.setCompany(c1);
         eRepo.insert(emp3);
 
         emp2.setName("Sara");
@@ -57,6 +67,13 @@ public class App {
         System.out.println("------------");
         Employee nuevo = eRepo.findById(3L);
         System.out.println(nuevo.getAddress());
+        System.out.println(nuevo.getCompany());
+
+        System.out.println("--- Company ----");
+        Company comp1 = cRepo.findById(1L);
+        System.out.println(comp1);
+        System.out.println(comp1.getEmployees());
+        //comp1.getEmployees().forEach(System.out::println);
 
         //Cerrar sesión BBDD
         eRepo.close();

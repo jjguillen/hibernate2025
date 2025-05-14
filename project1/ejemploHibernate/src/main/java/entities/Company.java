@@ -2,7 +2,10 @@ package entities;
 
 import jakarta.persistence.*;
 
-@Entity
+import java.util.HashSet;
+import java.util.Set;
+
+@Entity(name = "companies")
 public class Company {
 
     @Id
@@ -13,6 +16,15 @@ public class Company {
     private String name;
 
     private String address;
+
+    @OneToMany(fetch = FetchType.EAGER, mappedBy = "company")
+    //mappedBy --> nombre del atributo en la clase Employee que hace referencia a Company
+    //, al @ManyToOne
+    //FetchType.EAGER --> cada vez que se carga la Company se cargan todos los employees
+    //Esto haría un JOIN de todas las tablas, y empeoraría el rendimiento
+    //FetchType.LAZY --> cada vez que carga Company solo se traen sus datos
+    //Cuando quiero sacar los empleados, en ese momento se hace un nuevo Select
+    private Set<Employee> employees = new HashSet<>();
 
     public Company() {
     }
@@ -44,6 +56,14 @@ public class Company {
 
     public void setAddress(String address) {
         this.address = address;
+    }
+
+    public Set<Employee> getEmployees() {
+        return employees;
+    }
+
+    public void setEmployees(Set<Employee> employees) {
+        this.employees = employees;
     }
 
     @Override
